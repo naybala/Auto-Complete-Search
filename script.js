@@ -192,25 +192,26 @@ const resultContainerTag = document.querySelector(".resultContainer", [0]);
 let filteredProducts = [];
 
 autoCompleteInputTag.addEventListener("keyup", (e) => {
-  // console.log(e.key);
+  //adding Keyboard Function End
+  // ///console.log(e.key);
   //adding Keyboard Function
   if (
     e.key === "ArrowDown" ||
     e.key === "ArrowUp" ||
-    e.key === "Enter"
+    e.key === "Enter" ||
+    e.key === "Backspace" ||
+    e.key === "Delete"
   ) {
     navigateAndSelectProduct(e.key);
     return;
   }
-
-  //adding Keyboard Function End
-
   //Filter Show Search Result
   resultContainerTag.innerHTML = "";
   const searchText = e.target.value.toLowerCase();
   if (searchText.length === 0) {
     return;
   }
+
   filteredProducts = products.filter((product) => {
     return product.title.toLowerCase().includes(searchText);
   });
@@ -238,12 +239,13 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
       //Filter Show Search Result End
     }
   }
+
 });
 
 let indexToSelect = -1;
 const navigateAndSelectProduct = (key) => {
   if (key === "ArrowDown") {
-    if (indexToSelect == filteredProducts.length) {
+    if (indexToSelect === filteredProducts.length) {
       indexToSelect = 0;
     }
     if (indexToSelect === filteredProducts.length - 1) {
@@ -270,7 +272,7 @@ const navigateAndSelectProduct = (key) => {
     deselectProduct();
     const productItemContainerToSelect = selectProduct(indexToSelect);
     productItemContainerToSelect.classList.add("selected");
-  } else {
+  } else if (key === "Enter") {
 
     ///Enter End 25.feb
     if (indexToSelect === -1) {
@@ -284,6 +286,9 @@ const navigateAndSelectProduct = (key) => {
       }
     }
     //End 25.feb
+  } else {
+    resultContainerTag.innerHTML = "";
+    indexToSelect = -1;
   }
 }
 
