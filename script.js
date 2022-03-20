@@ -237,6 +237,21 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
       productItemContainer.append(productId, productName, productImage);
       resultContainerTag.append(productItemContainer);
       //Filter Show Search Result End
+
+      productItemContainer.addEventListener("mouseenter", (e) => {
+        e.target.style.backgroundColor = "#237BFF";
+        e.target.firstChild.style.color = "white";
+        e.target.childNodes[1].style.color = "white";
+      });
+      productItemContainer.addEventListener("mouseleave", (e) => {
+        e.target.style.backgroundColor = "white";
+        e.target.firstChild.style.color = "black";
+        e.target.childNodes[1].style.color = "black";
+      });
+      productItemContainer.addEventListener("click", () => {
+        const productIdToSelect = filteredProducts[i].title;
+        console.log(productIdToSelect);
+      });
     }
   }
 
