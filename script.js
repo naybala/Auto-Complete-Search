@@ -192,7 +192,6 @@ const resultContainerTag = document.querySelector(".resultContainer", [0]);
 let filteredProducts = [];
 
 autoCompleteInputTag.addEventListener("keyup", (e) => {
-  //adding Keyboard Function End
   // ///console.log(e.key);
   //adding Keyboard Function
   if (
@@ -205,6 +204,8 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
     navigateAndSelectProduct(e.key);
     return;
   }
+  //adding Keyboard Function End
+
   //Filter Show Search Result
   resultContainerTag.innerHTML = "";
   const searchText = e.target.value.toLowerCase();
@@ -238,6 +239,8 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
       resultContainerTag.append(productItemContainer);
       //Filter Show Search Result End
 
+
+      //Adding Mouse Event With Cursor And Click
       productItemContainer.addEventListener("mouseenter", (e) => {
         e.target.style.backgroundColor = "#237BFF";
         e.target.firstChild.style.color = "white";
@@ -252,11 +255,13 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
         const productIdToSelect = filteredProducts[i].title;
         console.log(productIdToSelect);
       });
+      //Adding Mouse Event With Cursor And Click End
     }
   }
 
 });
 
+//Calling And Using Keyboard Function
 let indexToSelect = -1;
 const navigateAndSelectProduct = (key) => {
   if (key === "ArrowDown") {
@@ -288,8 +293,6 @@ const navigateAndSelectProduct = (key) => {
     const productItemContainerToSelect = selectProduct(indexToSelect);
     productItemContainerToSelect.classList.add("selected");
   } else if (key === "Enter") {
-
-    ///Enter End 25.feb
     if (indexToSelect === -1) {
       return;
     } else {
@@ -300,13 +303,15 @@ const navigateAndSelectProduct = (key) => {
         }
       }
     }
-    //End 25.feb
   } else {
     resultContainerTag.innerHTML = "";
     indexToSelect = -1;
   }
 }
+//Calling And Using Keyboard Function End
 
+
+//This is Select Function 
 const selectProduct = (indexToSelect) => {
   const productIdToSelect = filteredProducts[indexToSelect].id.toString();
   const productItemContainerToSelect = document.getElementById(
@@ -316,14 +321,16 @@ const selectProduct = (indexToSelect) => {
   productItemContainerToSelect.firstChild.style.color = "white";
   return productItemContainerToSelect;
 };
+//This is Select Function End
 
+//This is Deselect Function 
 const deselectProduct = () => {
   const productToDeselect = document.getElementsByClassName("selected")[0];
   productToDeselect.style.backgroundColor = "white";
   productToDeselect.firstChild.style.color = "black";
   productToDeselect.classList.remove("selected");
 };
-
+//This is Deselect Function End
 
 
 
