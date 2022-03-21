@@ -190,7 +190,6 @@ const products = [
 const autoCompleteInputTag = document.querySelector(".autoCompleteInput", [0]);
 const resultContainerTag = document.querySelector(".resultContainer", [0]);
 let filteredProducts = [];
-
 autoCompleteInputTag.addEventListener("keyup", (e) => {
   // ///console.log(e.key);
   //adding Keyboard Function
@@ -210,7 +209,7 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
   resultContainerTag.innerHTML = "";
   const searchText = e.target.value.toLowerCase();
   if (searchText.length === 0) {
-    return;
+    return false;
   }
 
   filteredProducts = products.filter((product) => {
@@ -237,7 +236,9 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
 
       productItemContainer.append(productId, productName, productImage);
       resultContainerTag.append(productItemContainer);
-      //Filter Show Search Result End
+      resultContainerTag.style.maxHeight = "200px";
+      resultContainerTag.style.borderBottomLeftRadius = "0.5rem";
+      resultContainerTag.style.borderBottomRightRadius = "0.5rem";
 
 
       //Adding Mouse Event With Cursor And Click
@@ -265,6 +266,13 @@ autoCompleteInputTag.addEventListener("keyup", (e) => {
 let indexToSelect = -1;
 const navigateAndSelectProduct = (key) => {
   if (key === "ArrowDown") {
+    //Thinking about auto scroll after clicking down arrow
+    // if (filteredProducts.length > 3) {
+    //   $(document).ready(function () {
+    //     $('.resultContainer').scrollTo(200);
+    //   });
+
+    // }
     if (indexToSelect === filteredProducts.length) {
       indexToSelect = 0;
     }
@@ -319,6 +327,7 @@ const selectProduct = (indexToSelect) => {
   );
   productItemContainerToSelect.style.backgroundColor = "#237BFF";
   productItemContainerToSelect.firstChild.style.color = "white";
+  productItemContainerToSelect.childNodes[1].style.color = "white";
   return productItemContainerToSelect;
 };
 //This is Select Function End
@@ -328,6 +337,7 @@ const deselectProduct = () => {
   const productToDeselect = document.getElementsByClassName("selected")[0];
   productToDeselect.style.backgroundColor = "white";
   productToDeselect.firstChild.style.color = "black";
+  productToDeselect.childNodes[1].style.color = "black";
   productToDeselect.classList.remove("selected");
 };
 //This is Deselect Function End
